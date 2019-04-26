@@ -10,11 +10,7 @@ class Band extends Component {
         <Segment>
           <Item.Group>
             <Item>
-              <Item.Image
-                size="tiny"
-                circular
-                src={band.imageURL}
-              />
+              <Item.Image size="tiny" circular src={band.imageURL} />
               <Item.Content>
                 <Item.Header as="a">{band.name}</Item.Header>
                 <Item.Description>
@@ -32,15 +28,26 @@ class Band extends Component {
         </Segment>
         <Segment secondary>
           <List horizontal>
-            {band.fans && band.fans.map((fan) => (
-              <BandFans key={fan.id} fan={fan} />
-            ))}
+            {band.fans &&
+              band.fans.map(fan => <BandFans key={fan.id} fan={fan} />)}
           </List>
         </Segment>
         <Segment clearing>
           <span>{band.description}</span>
-          <Button onClick={deleteBand(band.id)} as="a" color="red" floated="right" content="Delete" />
-          <Button onClick={onBandOpen(band)} as="a" color="teal" floated="right" content="View" />
+          <Button
+            onClick={deleteBand(band.id)}
+            as="a"
+            color="red"
+            floated="right"
+            content="Delete"
+          />
+          <Button
+            onClick={onBandOpen(band)}
+            as="a"
+            color="teal"
+            floated="right"
+            content="View"
+          />
         </Segment>
       </Segment.Group>
     );
