@@ -9,6 +9,7 @@ import Band from "./Components/Bands/Band";
 import UserDetails from "./Components/Users/UserDetails/UserDetails";
 import SettingsDashboard from "./Components/Users/Settings/SettingsDashboard";
 import HomePage from "./Components/HomePage/HomePage";
+import test from "./Components/Test/test";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <NavBar />
             <Container className="main">
               <Switch>
+                <Route path='/test' component={test} />
                 <Route path="/bands" component={BandsDashboard} />
                 <Route path="/band/:id" component={Band} />
                 <Route path="/fans" component={FansDashboard} />
