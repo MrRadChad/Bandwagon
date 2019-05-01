@@ -7,6 +7,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Store } from "./Store/Store";
+import Scrolltotop from "./common/util/scrolltotop";
 
 const store = Store();
 
@@ -16,7 +17,9 @@ let render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <App />
+        <Scrolltotop>
+          <App />
+        </Scrolltotop>
       </Router>
     </Provider>
     , rootEL

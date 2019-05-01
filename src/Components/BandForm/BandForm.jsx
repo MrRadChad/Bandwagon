@@ -1,40 +1,56 @@
 import React, { Component } from "react";
 import { Segment, Form, Button } from "semantic-ui-react";
+import {connect} from 'react-redux'
+import {createBand, updateBand} from '../../bandList/bandActions'
+import cuid from 'cuid'
 
-const emptyBand = {
-  name: "",
-  email: "",
-  genre: "",
-  city: "",
-  manager: "",
-  description: "",
-  imageURL: ""
-};
+const mapState = (state, ownProps) => {
+  const bandId = ownProps.match.params.id;
+
+  let band = {
+    name: "",
+    email: "",
+    genre: "",
+    city: "",
+    manager: "",
+    description: "",
+    imageURL: ""
+  }
+
+  if (bandId && state.bands.length > 0) {
+    band = state.bands.filter(band => band.id === bandId)[0]
+  }
+
+  return {
+    band
+  }
+}
+
+const actions = {
+  createBand,
+  updateBand
+}
 
 class BandForm extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      band: emptyBand
-    };
+  state = {
+    band: Object.assign({}, this.props.band)
   }
 
-  componentDidMount() {
-    if (this.props.selectedBand !== null) {
-      this.setState({
-        band: this.props.selectedBand
-      });
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    if (this.state.band.id) {
+      this.props.updateBand(this.state.band);
+      this.props.history.goBack();
+    } else {
+      const newBand = {
+        ...this.state.band,
+        id: cuid(),
+        bandPhotoURL: 'https://picsum.photos/225'
+      };
+      this.props.createBand(newBand)
+      this.props.history.push('/bands')
     }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedBand !== this.props.selectedBand) {
-      this.setState({
-        band: nextProps.selectedBand || emptyBand
-      });
-    }
-  }
+  };
 
   onInputChange = event => {
     const newBand = this.state.band;
@@ -43,15 +59,6 @@ class BandForm extends Component {
       band: newBand
     });
     console.log(this.state);
-  };
-
-  onFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.band.id) {
-      this.props.updateBand(this.state.band);
-    } else {
-      this.props.addBand(this.state.band);
-    }
   };
 
   render() {
@@ -127,7 +134,7 @@ class BandForm extends Component {
             <Button positive type="submit" onClick={this.onFormSubmit}>
               Submit
             </Button>
-            <Button onClick={handleCancel} type="button">
+            <Button onClick={this.props.history.goBack} type="button">
               Cancel
             </Button>
           </Form>
@@ -137,4 +144,4 @@ class BandForm extends Component {
   }
 }
 
-export default BandForm;
+export default connect(mapState, actions) (BandForm);

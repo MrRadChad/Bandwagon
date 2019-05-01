@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Segment, Icon, Item, List, Button } from "semantic-ui-react";
 import BandFans from "./BandFans";
+import {Link} from 'react-router-dom'
 
 class Band extends Component {
   render() {
-    const { band, onBandOpen, deleteBand } = this.props;
+    const { band, deleteBand } = this.props;
     return (
       <Segment.Group>
         <Segment>
@@ -42,8 +43,8 @@ class Band extends Component {
             content="Delete"
           />
           <Button
-            onClick={onBandOpen(band)}
-            as="a"
+            as={Link}
+            to={`/band/${band.id}`}
             color="teal"
             floated="right"
             content="View"

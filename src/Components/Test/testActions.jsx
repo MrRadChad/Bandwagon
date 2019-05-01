@@ -1,4 +1,4 @@
-import {INCREMENT_COUNTER, DECREMENT_COUNTER } from './testConstants'
+import {INCREMENT_COUNTER, DECREMENT_COUNTER } from './testActionTypes'
 
 export const incrementCounter = () => {
     return {

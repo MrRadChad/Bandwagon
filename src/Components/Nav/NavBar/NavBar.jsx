@@ -40,8 +40,6 @@ class NavBar extends Component {
                   as={Link}
                   to="/createband"
                   floated="right"
-                  positive
-                  inverted
                   content="Add Your Band"
                 />
               </Menu.Item>

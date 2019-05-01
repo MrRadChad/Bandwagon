@@ -5,11 +5,11 @@ import BandsDashboard from "./Components/BandsDashboard/BandsDashboard";
 import NavBar from "./Components/Nav/NavBar/NavBar";
 import BandForm from "./Components/BandForm/BandForm";
 import FansDashboard from "../src/Components/Users/FansDashboard/FansDashboard";
-import Band from "./Components/Bands/Band";
 import UserDetails from "./Components/Users/UserDetails/UserDetails";
 import SettingsDashboard from "./Components/Users/Settings/SettingsDashboard";
 import HomePage from "./Components/HomePage/HomePage";
 import test from "./Components/Test/test";
+import BandDetails from "./Components/BandDetails/BandDetailedView";
 
 function App() {
   return (
@@ -26,9 +26,9 @@ function App() {
               <Switch>
                 <Route path='/test' component={test} />
                 <Route path="/bands" component={BandsDashboard} />
-                <Route path="/band/:id" component={Band} />
+                <Route path="/band/:id" component={BandDetails} />
+                <Route path="/manage/:id" component={BandForm} />
                 <Route path="/fans" component={FansDashboard} />
-                <Route path="/band/:id" component={Band} />
                 <Route path="/profile/:id" component={UserDetails} />
                 <Route path="/settings" component={SettingsDashboard} />
                 <Route path="/createband" component={BandForm} />
