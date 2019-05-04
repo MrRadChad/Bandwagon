@@ -10,10 +10,12 @@ import SettingsDashboard from "./Components/Users/Settings/SettingsDashboard";
 import HomePage from "./Components/HomePage/HomePage";
 import test from "./Components/Test/test";
 import BandDetails from "./Components/BandDetails/BandDetailedView";
+import ModalManager from './Modals/ModalManager'
 
 function App() {
   return (
     <div>
+      <ModalManager />
       <Switch>
         <Route exact path="/" component={HomePage} />
       </Switch>

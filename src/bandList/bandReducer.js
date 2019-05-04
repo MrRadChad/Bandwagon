@@ -6,7 +6,7 @@ const initialState = [
     id: "1",
     name: "Band Name 1",
     email: "email1@bandname1.com",
-    genre: "Rock",
+    genre: ['Rock'],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "Provo, UT",
@@ -29,7 +29,7 @@ const initialState = [
     id: "2",
     name: "Band Name 2",
     email: "email2@bandname2.com",
-    genre: "Alternative",
+    genre: ["Alternative"],
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.",
     city: "SLC, UT",

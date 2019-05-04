@@ -19,6 +19,7 @@ let render = () => {
       <Router>
         <Scrolltotop>
           <App />
+          <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
         </Scrolltotop>
       </Router>
     </Provider>

@@ -42,7 +42,7 @@ function BandDetailsHeader({band}) {
         <Segment attached="bottom">
           <Button color="red">Delete This Band</Button>
 
-          <Button color="teal">Love this Band</Button>
+          <Button color='rgb(55, 190, 231)'>Love this Band</Button>
 
           <Button as={Link} to={`/manage/${band.id}`} color="orange" floated="right">
             Manage Details

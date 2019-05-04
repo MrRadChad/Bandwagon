@@ -2,11 +2,11 @@ import React from "react";
 import {Menu, Image, Dropdown} from 'semantic-ui-react';
 import {Link} from 'react-router-dom'
 
-function Signedin({signOut}) {
+function Signedin({signOut, currentUser}) {
   return (
     <Menu.Item position="right">
       <Image avatar spaced="right" src="/assets/logo.png" />
-      <Dropdown pointing="top left" text="Username">
+      <Dropdown pointing="top left" text={currentUser}>
         <Dropdown.Menu>
           <Dropdown.Item text="Add My Band" icon="plus" />
           <Dropdown.Item text="My Band" icon="music" />
