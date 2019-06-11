@@ -30,7 +30,7 @@ class Band extends Component {
         <Segment secondary>
           <List horizontal>
             {band.fans &&
-              band.fans.map(fan => <BandFans key={fan.id} fan={fan} />)}
+              Object.values(band.fans).map((fan, index) => (<BandFans key={fan.index} fan={fan} />))}
           </List>
         </Segment>
         <Segment clearing>

@@ -19,7 +19,7 @@ import {
   isRequired,
   hasLengthGreaterThan
 } from "revalidate";
-import PlaceInput from "../../common/Form/PlaceInput";
+// import PlaceInput from "../../common/Form/PlaceInput";
 
 const mapState = (state, ownProps) => {
   const bandId = ownProps.match.params.id;
@@ -115,6 +115,7 @@ class BandForm extends Component {
                 name="city"
                 type="text"
                 component={TextInput}
+                // options={{types: ['(cities)']}}
                 placeholder="City"
               />
               <Field
@@ -164,6 +165,5 @@ class BandForm extends Component {
 export default connect(
   mapState,
   actions
-)(
-  reduxForm({ form: "bandForm", enableReinitialize: true, validate })(BandForm)
+)(reduxForm({ form: "bandForm", enableReinitialize: true, validate })(BandForm)
 );

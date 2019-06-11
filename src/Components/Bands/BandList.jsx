@@ -6,7 +6,7 @@ class BandList extends Component {
     const { bands, deleteBand } = this.props;
     return (
       <div>
-        {bands.map(band => (
+        {bands && bands.map(band => (
           <Band
             key={band.id}
             band={band}
