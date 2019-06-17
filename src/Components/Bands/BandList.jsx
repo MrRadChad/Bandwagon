@@ -3,14 +3,14 @@ import Band from "./Band";
 
 class BandList extends Component {
   render() {
-    const { bands, deleteBand } = this.props;
+    const { bands } = this.props;
     return (
       <div>
         {bands && bands.map(band => (
           <Band
             key={band.id}
             band={band}
-            deleteBand={deleteBand}
+            // deleteBand={deleteBand}
           />
         ))}
       </div>

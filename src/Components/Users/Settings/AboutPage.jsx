@@ -16,6 +16,28 @@ const instruments = [
   { key: 'piano', text: 'Piano', value: 'piano' },
 ];
 
+const genres = [
+  { key: "alternative", text: "Alternative", value: "Alternative" },
+  { key: "americana", text: "Americana", value: "Americana" },
+  { key: "blues", text: "Blues", value: "Blues" },
+  { key: "coutry", text: "Coutry", value: "Coutry" },
+  { key: "dance", text: "Dance", value: "Dance" },
+  { key: "electronic", text: "Electronic", value: "Electronic" },
+  { key: "hard-rock", text: "Hard-Rock", value: "Hard-Rock" },
+  { key: "hip-hop", text: "Hip-Hop", value: "Hip-Hop" },
+  { key: "indie", text: "Indie", value: "Indie" },
+  { key: "jazz", text: "Jazz", value: "Jazz" },
+  { key: "latin", text: "Latin", value: "Latin" },
+  { key: "metal", text: "Metal", value: "Metal" },
+  { key: "pop", text: "Pop", value: "Pop" },
+  { key: "punk", text: "Punk", value: "Punk" },
+  { key: "r&b", text: "R&B", value: "R&B" },
+  { key: "reggae", text: "Reggae", value: "Reggae" },
+  { key: "rock", text: "Rock", value: "Rock" },
+  {key: "singer/songwriter", text: "Singer/Songwriter", value: "Singer/Songwriter"},
+  { key: "ska", text: "Ska", value: "Ska" }
+]
+
 const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
   return (
     <Segment>
@@ -58,11 +80,12 @@ const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
           placeholder="Select the instruments you play"
         />
         <Field
-          width={8}
-          name="occupation"
-          type="text"
-          component={TextInput}
-          placeholder="Occupation"
+          name="genres"
+          component={SelectInput}
+          options={genres}
+          value="genres"
+          multiple={true}
+          placeholder='Select the genres you love'
         />
         <Field
           width={8}

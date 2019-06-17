@@ -8,8 +8,7 @@ import {
   GridColumn
 } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { createBand, updateBand } from "../../bandList/bandActions";
-import cuid from "cuid";
+import { createBand, updateBand, disbandedToggle } from "../../bandList/bandActions";
 import { reduxForm, Field } from "redux-form";
 import TextInput from "../../common/Form/TextInput";
 import TextArea from "../../common/Form/TextArea";
@@ -19,6 +18,7 @@ import {
   isRequired,
   hasLengthGreaterThan
 } from "revalidate";
+import { withFirestore } from "react-redux-firebase";
 // import PlaceInput from "../../common/Form/PlaceInput";
 
 const mapState = (state, ownProps) => {
@@ -26,18 +26,20 @@ const mapState = (state, ownProps) => {
 
   let band = {};
 
-  if (bandId && state.bands.length > 0) {
-    band = state.bands.filter(band => band.id === bandId)[0];
+  if (state.firestore.ordered.Bands && state.firestore.ordered.Bands.length > 0) {
+    band = state.firestore.ordered.Bands.filter(band => band.id === bandId)[0] || {};
   }
 
   return {
-    initialValues: band
+    initialValues: band,
+    band
   };
 };
 
 const actions = {
   createBand,
-  updateBand
+  updateBand,
+  disbandedToggle
 };
 
 const genre = [
@@ -76,23 +78,34 @@ const validate = combineValidators({
 });
 
 class BandForm extends Component {
-  onFormSubmit = values => {
-    if (this.props.initialValues.id) {
-      this.props.updateBand(values);
-      this.props.history.goBack();
-    } else {
-      const newBand = {
-        ...values,
-        id: cuid(),
-        bandPhotoURL: "https://picsum.photos/225"
-      };
-      this.props.createBand(newBand);
-      this.props.history.push("/bands");
+
+  async componentDidMount () {
+    const {firestore, match} =this.props;
+    await firestore.setListener(`Bands/${match.params.id}`);
+  }
+
+  async componentWillUnmount () {
+    const {firestore, match} =this.props;
+    await firestore.unsetListener(`Bands/${match.params.id}`);
+  }
+
+  onFormSubmit = async values => {
+    try {
+      if (this.props.initialValues.id) {
+        this.props.updateBand(values);
+        this.props.history.push(`/band/${this.props.initialValues.id}`);
+      } else {
+        let createdBand = await this.props.createBand(values);
+        this.props.history.push(`/band/${createdBand.id}`);
+      }
+    } catch (error) {
+      console.log(error)
     }
+    
   };
 
   render() {
-    const { invalid, submitting, pristine } = this.props;
+    const { invalid, submitting, pristine, band, disbandedToggle } = this.props;
     return (
       <Grid>
         <GridColumn width={10}>
@@ -154,6 +167,13 @@ class BandForm extends Component {
               <Button onClick={this.props.history.goBack} type="button">
                 Cancel
               </Button>
+              <Button
+              type='button'
+              color={band.disbanded ? 'green' : 'red'}
+              floated='right'
+              content={band.disbanded ? 'Reunite' : 'Hiatus?'} 
+              onClick={() => disbandedToggle(!band.disbanded, band.id)}
+              />
             </Form>
           </Segment>
         </GridColumn>
@@ -162,8 +182,8 @@ class BandForm extends Component {
   }
 }
 
-export default connect(
+export default withFirestore(connect(
   mapState,
   actions
 )(reduxForm({ form: "bandForm", enableReinitialize: true, validate })(BandForm)
-);
+));

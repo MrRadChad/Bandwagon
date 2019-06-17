@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Grid, GridColumn } from "semantic-ui-react";
 import BandList from "../Bands/BandList";
-import { deleteBand } from "../../bandList/bandActions";
+// import { deleteBand } from "../../bandList/bandActions";
 import EventActivity from "../BandActivity/BandActivity";
 
 const mapState = state => ({
@@ -12,7 +12,7 @@ const mapState = state => ({
 });
 
 const actions = {
-  deleteBand
+  // deleteBand
 };
 
 class BandsDashboard extends Component {

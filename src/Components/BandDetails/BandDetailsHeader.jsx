@@ -40,7 +40,7 @@ function BandDetailsHeader({band}) {
         </Segment>
 
         <Segment attached="bottom">
-          <Button color="red">Delete This Band</Button>
+          {/* <Button color="red">Delete This Band</Button> */}
 
           <Button color='rgb(55, 190, 231)'>Love this Band</Button>
 

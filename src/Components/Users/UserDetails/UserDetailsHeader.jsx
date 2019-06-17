@@ -1,9 +1,9 @@
 import React from "react";
 import {Grid, Segment, Item, Header} from 'semantic-ui-react'
-import differenceInYears from 'date-fns'
+import differenceInYears from 'date-fns/difference_in_years'
 
 
-function UserDetailsHeader({profile}) {
+export default function UserDetailsHeader ({profile}) {
     let age;
     if (profile.dateOfBirth){
         age= differenceInYears(Date.now(), profile.dateOfBirth.toDate())
@@ -34,5 +34,3 @@ function UserDetailsHeader({profile}) {
     </Grid.Column>
   );
 }
-
-export default UserDetailsHeader;

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Segment, Icon, Item, List, Button } from "semantic-ui-react";
+import { Segment, Icon, Item, List, Button, Label } from "semantic-ui-react";
 import BandFans from "./BandFans";
 import {Link} from 'react-router-dom'
 
 class Band extends Component {
   render() {
-    const { band, deleteBand } = this.props;
+    const { band } = this.props;
     return (
       <Segment.Group>
         <Segment>
@@ -17,6 +17,13 @@ class Band extends Component {
                 <Item.Description>
                   Managed by <a>{band.manager}</a>
                 </Item.Description>
+                {band.disbanded &&
+                <Label
+                style ={{top:'-40px'}} 
+                ribbon='right'
+                color='grey'
+                content = 'This band is no longer together'
+                />}
               </Item.Content>
             </Item>
           </Item.Group>
@@ -35,13 +42,13 @@ class Band extends Component {
         </Segment>
         <Segment clearing>
           <span>{band.description}</span>
-          <Button
+          {/* <Button
             onClick={deleteBand(band.id)}
             as="a"
             color="red"
             floated="right"
             content="Delete"
-          />
+          /> */}
           <Button
             as={Link}
             to={`/band/${band.id}`}
